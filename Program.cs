@@ -755,6 +755,9 @@ namespace PokemonPocket
                                         if (computerpokemongenerate.HP < 0)
                                         {
                                             Green_Msg("You won this game");
+                                            Green_Msg("You win 5 coins");
+                                            db.MyCoins.First().coins += 5;
+                                            db.SaveChanges();
                                             break;
                                         }
                                         else
@@ -771,11 +774,17 @@ namespace PokemonPocket
                                         if (computerpokemongenerate.HP < 0)
                                         {
                                             Green_Msg("You won this game");
+                                            Green_Msg("You win 5 coins");
+                                            db.MyCoins.First().coins += 5;
+                                            db.SaveChanges();
                                             break;
                                         }
                                         else
                                         {
                                             Green_Msg("You attacked the pokemon");
+                                            Green_Msg("You win 5 coins");
+                                            db.MyCoins.First().coins += 5;
+                                            db.SaveChanges();
                                             continue;
                                         } 
                                     }
