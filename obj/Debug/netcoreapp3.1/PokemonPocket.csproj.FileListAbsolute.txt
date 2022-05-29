@@ -1,0 +1,13 @@
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\bin\Debug\netcoreapp3.1\PokemonPocket.exe
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\bin\Debug\netcoreapp3.1\PokemonPocket.deps.json
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\bin\Debug\netcoreapp3.1\PokemonPocket.runtimeconfig.json
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\bin\Debug\netcoreapp3.1\PokemonPocket.runtimeconfig.dev.json
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\bin\Debug\netcoreapp3.1\PokemonPocket.dll
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\bin\Debug\netcoreapp3.1\PokemonPocket.pdb
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\obj\Debug\netcoreapp3.1\PokemonPocket.csprojAssemblyReference.cache
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\obj\Debug\netcoreapp3.1\PokemonPocket.AssemblyInfoInputs.cache
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\obj\Debug\netcoreapp3.1\PokemonPocket.AssemblyInfo.cs
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\obj\Debug\netcoreapp3.1\PokemonPocket.csproj.CoreCompileInputs.cache
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\obj\Debug\netcoreapp3.1\PokemonPocket.dll
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\obj\Debug\netcoreapp3.1\PokemonPocket.pdb
+C:\Users\novita\Desktop\IT2154 ASN1\PokemonPocket\obj\Debug\netcoreapp3.1\PokemonPocket.genruntimeconfig.cache

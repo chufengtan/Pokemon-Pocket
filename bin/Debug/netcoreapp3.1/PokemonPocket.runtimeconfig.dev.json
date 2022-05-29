@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\novita\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\novita\\.nuget\\packages"
+    ]
+  }
+}
