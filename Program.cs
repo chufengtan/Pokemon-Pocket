@@ -64,7 +64,6 @@ namespace PokemonPocket
                     "Evolve pokemon",
                     "Sell pokemon",
                     "Battle pokemon",
-                    "Guess what am I",
                     "Shop",
                     "My inventory"
                 };
@@ -194,11 +193,8 @@ namespace PokemonPocket
             }
             void MyPokemon()
             {
-                var Pokemons = db.MyPokemons
-                .OrderBy(b => b.Id)
-                .ToList();
                 int number = 0;
-                foreach (Pokemon pokemon in Pokemons)
+                foreach (Pokemon pokemon in db.MyPokemons.ToList())
                 {
                     number++;
                     Console.WriteLine("--------------------------------");
@@ -269,7 +265,7 @@ namespace PokemonPocket
                             flareon.Attack = 0;
                             db.MyPokemons.Add(flareon);
                             db.SaveChanges();
-                            Console.WriteLine(evolvingpokemon.Name + " has successfully evolved into " + evolvingpokemon.EvolveTo);
+                            Green_Msg(evolvingpokemon.Name + " has successfully evolved into " + evolvingpokemon.EvolveTo);
                             int remove_count = 0;
                             var Samepokemon = db.MyPokemons.Where(a => a.Name == evolvingpokemon.Name).ToList();
                             foreach (var pokemon in Samepokemon)
@@ -292,7 +288,7 @@ namespace PokemonPocket
                             charmeleon.Attack = 0;
                             db.MyPokemons.Add(charmeleon);
                             db.SaveChanges();
-                            Console.WriteLine(evolvingpokemon.Name + " has successfully evolved into " + evolvingpokemon.EvolveTo);
+                            Green_Msg(evolvingpokemon.Name + " has successfully evolved into " + evolvingpokemon.EvolveTo);
                             int remove_count = 0;
                             var Samepokemon = db.MyPokemons.Where(a => a.Name == evolvingpokemon.Name).ToList();
                             foreach (var pokemon in Samepokemon)
@@ -339,7 +335,7 @@ namespace PokemonPocket
                             break;
                         }
                         int pokemonnumber = Convert.ToInt32(input);
-                        if (pokemonnumber < 0)
+                        if (pokemonnumber <= 0)
                         {
                             Red_Msg("Pokemon number input is invalid as it cannot be negative. Please try again!");
                             continue;
@@ -606,7 +602,215 @@ namespace PokemonPocket
             void fightpokemon()
             {
                 Yellow_Msg("Welcome to this second part of the game: fighting Pokemon");
-                
+                while (true)
+                {
+                    int count = 0;
+                    foreach (Pokemon pokemon in db.MyPokemons.ToList())
+                    {
+                        count++;
+                        Console.WriteLine("--------------------------------");
+                        Console.WriteLine(count + ") Name: " + pokemon.Name);
+                        Console.WriteLine("   HP: " + pokemon.HP);
+                        Console.WriteLine("   Exp: " + pokemon.Exp);
+                        Console.WriteLine("   Attack: " + pokemon.Attack);
+                        Console.WriteLine("   Skill: " + pokemon.Skill);
+                        Console.WriteLine("--------------------------------");
+                    }
+                    try
+                    {
+                        Console.Write("Please only enter Pokemon Number that you want to use to fight or enter Q to go home: ");
+                        string input = Console.ReadLine().Trim();
+                        if (input.ToLower() == "q")
+                        {
+                            break;
+                        }
+                        int pokemonnumber = Convert.ToInt32(input);
+                        if (pokemonnumber <= 0)
+                        {
+                            Red_Msg("Pokemon number input is invalid as it cannot be negative. Please try again!");
+                            continue;
+                        }
+                        else if (pokemonnumber > count)
+                        {
+                            Red_Msg("Pokemon number input is invalid. Please try again!");
+                            continue;
+                        }
+                        else if(db.MyPokemons.ToList()[pokemonnumber - 1].Attack <= 60 || db.MyPokemons.ToList()[pokemonnumber - 1].HP <= 60)
+                        {
+                            Red_Msg("Pokemon health or attack is not enought to fight. Health and attack need above 60. Please pick another pokemon!");
+                            continue;
+                        }
+                        else
+                        {   
+                            Random rnd = new Random();                      
+                            List<Pokemon> ComputerPokemon = new List<Pokemon>(){
+                            new Pikachu("Pikachu", rnd.Next(db.MyPokemons.ToList()[pokemonnumber - 1].HP - 20, db.MyPokemons.ToList()[pokemonnumber - 1].HP + 21), 4),
+                            new Eevee("Eevee", rnd.Next(db.MyPokemons.ToList()[pokemonnumber - 1].HP - 20, db.MyPokemons.ToList()[pokemonnumber - 1].HP + 21), 4),
+                            new Charmander("Charmander", rnd.Next(db.MyPokemons.ToList()[pokemonnumber - 1].HP - 20, db.MyPokemons.ToList()[pokemonnumber - 1].HP + 21), 4),
+                            new Pikachu("Raichu", rnd.Next(db.MyPokemons.ToList()[pokemonnumber - 1].HP - 50, db.MyPokemons.ToList()[pokemonnumber - 1].HP + 101), 4),
+                            new Eevee("Flareon", rnd.Next(db.MyPokemons.ToList()[pokemonnumber - 1].HP - 50, db.MyPokemons.ToList()[pokemonnumber - 1].HP + 101), 4),
+                            new Charmander("Charmeleon", rnd.Next(db.MyPokemons.ToList()[pokemonnumber - 1].HP - 50, db.MyPokemons.ToList()[pokemonnumber - 1].HP + 101), 4)
+                            };
+                            foreach (var item in ComputerPokemon)
+                            {
+                                if (item.Name == "Pikachu" || item.Name == "Eevee" || item.Name == "Charmander")
+                                {
+                                    item.Attack = rnd.Next(db.MyPokemons.ToList()[pokemonnumber - 1].HP - 20, db.MyPokemons.ToList()[pokemonnumber - 1].HP + 21);
+                                }
+                                else
+                                {
+                                    item.Attack = rnd.Next(db.MyPokemons.ToList()[pokemonnumber - 1].HP - 50, db.MyPokemons.ToList()[pokemonnumber - 1].HP + 101);
+                                }
+                            }
+                            var computerpokemongenerate = ComputerPokemon[rnd.Next(ComputerPokemon.Count())];
+                            Console.WriteLine("In order for you to attack the pokemon, you need to win the computer in Scissors, Paper, and Stone game.");
+                            Console.WriteLine("If you loss, you will get attacked by the pokemon");
+                            List<string> Game = new List<string>(){
+                            "scissors",
+                            "paper",
+                            "stone"
+                            };
+                            while (true)
+                            {
+                                Yellow_Msg("Your Pokemon Target");
+                                Console.WriteLine("Name: " + computerpokemongenerate.Name);
+                                Console.WriteLine("Hp: " + computerpokemongenerate.HP);
+                                Console.WriteLine("Attack: " + computerpokemongenerate.Attack);
+                                Yellow_Msg("Your Pokemon");
+                                Console.WriteLine("Name: " + db.MyPokemons.ToList()[pokemonnumber - 1].Name);
+                                Console.WriteLine("Hp: " + db.MyPokemons.ToList()[pokemonnumber - 1].HP);
+                                Console.WriteLine("Attack: " + db.MyPokemons.ToList()[pokemonnumber - 1].Attack);
+                                Console.Write("Scissors, Paper or Stone: ");
+                                string userinput = Console.ReadLine().Trim().ToLower();
+                                if (userinput == "scissors" || userinput == "paper" || userinput == "stone")
+                                {
+                                    string computergame = Game[rnd.Next(Game.Count())];
+                                    if (computergame == userinput)
+                                    {
+                                        Console.WriteLine("Its a tie, No damaged");
+                                        continue;
+                                    }
+                                    else if(computergame == "scissors" && userinput == "paper")
+                                    {
+                                        Red_Msg("You lost, and you got attacked. Computer chose scissors");
+                                        var original = db.MyPokemons.ToList()[pokemonnumber - 1];
+                                        original.HP = original.HP - computerpokemongenerate.Attack;
+                                        db.SaveChanges();
+                                        if (original.HP < 0)
+                                        {
+                                            original.HP = 0;
+                                            db.SaveChanges();
+                                            Red_Msg("You lost this game");
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Red_Msg("Pokemon attacked you");
+                                            continue;
+                                        } 
+                                    }
+                                    else if(computergame == "paper" && userinput == "stone")
+                                    {
+                                        Red_Msg("You lost, and you got attacked. Computer chose paper");
+                                        var original = db.MyPokemons.ToList()[pokemonnumber - 1];
+                                        original.HP = original.HP - computerpokemongenerate.Attack;
+                                        db.SaveChanges();
+                                        if (original.HP < 0)
+                                        {
+                                            original.HP = 0;
+                                            db.SaveChanges();
+                                            Red_Msg("You lost this game");
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Red_Msg("Pokemon attacked you");
+                                            continue;
+                                        } 
+                                    }
+                                    else if(computergame == "stone" && userinput == "scissors")
+                                    {
+                                        Red_Msg("You lost, and you got attacked. Computer chose stone");
+                                        var original = db.MyPokemons.ToList()[pokemonnumber - 1];
+                                        original.HP = original.HP - computerpokemongenerate.Attack;
+                                        db.SaveChanges();
+                                        if (original.HP < 0)
+                                        {
+                                            original.HP = 0;
+                                            db.SaveChanges();
+                                            Red_Msg("You lost this game");
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Red_Msg("Pokemon attacked you");
+                                            continue;
+                                        } 
+                                    }
+                                    else if(computergame == "scissors" && userinput == "stone")
+                                    {
+                                        Green_Msg("You win, and you attacked the enemy. Computer chose scissors");
+                                        var original = db.MyPokemons.ToList()[pokemonnumber - 1];
+                                        computerpokemongenerate.HP = computerpokemongenerate.HP - original.Attack;
+                                        if (computerpokemongenerate.HP < 0)
+                                        {
+                                            Green_Msg("You won this game");
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Green_Msg("You attacked the pokemon");
+                                            continue;
+                                        } 
+                                    }
+                                    else if(computergame == "stone" && userinput == "paper")
+                                    {
+                                        Green_Msg("You win, and you attacked the enemy. Computer chose stone");
+                                        var original = db.MyPokemons.ToList()[pokemonnumber - 1];
+                                        computerpokemongenerate.HP = computerpokemongenerate.HP - original.Attack;
+                                        if (computerpokemongenerate.HP < 0)
+                                        {
+                                            Green_Msg("You won this game");
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Green_Msg("You attacked the pokemon");
+                                            continue;
+                                        } 
+                                    }
+                                    else if(computergame == "paper" && userinput == "scissors")
+                                    {
+                                        Green_Msg("You win, and you attacked the enemy. Computer chose paper");
+                                        var original = db.MyPokemons.ToList()[pokemonnumber - 1];
+                                        computerpokemongenerate.HP = computerpokemongenerate.HP - original.Attack;
+                                        if (computerpokemongenerate.HP < 0)
+                                        {
+                                            Green_Msg("You won this game");
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Green_Msg("You attacked the pokemon");
+                                            continue;
+                                        } 
+                                    }
+                                }
+                                else
+                                {
+                                    Red_Msg("Please only enter [Scissors, Paper, Stone].");
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        Red_Msg("Pokemon number input is invalid. Please try again!");
+                        continue;
+                    }
+                    break;
+                }
             }
 
             void CatchPokemon()
@@ -624,9 +828,7 @@ namespace PokemonPocket
                 };
                 Random rnd = new Random();
                 string ComputerPokemonLocation = Coordinates[rnd.Next(10)].Location;
-                Yellow_Msg("Welcome to this first part of the game: Catching Pokemon");
-                Console.WriteLine(ComputerPokemonLocation);
-                
+                Yellow_Msg("Welcome to this first part of the game: Catching Pokemon");                
                 while (true)
                 {
                     if (db.MyItems.ToList().Where(i => i.Name == "Pokeball").Count() > 0)
@@ -773,47 +975,31 @@ namespace PokemonPocket
                             break;
 
                         case "2":
-                            Console.WriteLine("Please enter a 2 key.");
                             MyPokemon();
                             break;
 
                         case "3":
-                            Console.WriteLine("Please enter a 3 key.");
                             EvolutionCheck();
                             break;
 
                         case "4":
-                            Console.WriteLine("Please enter a 4 key.");
                             EvolvePokemon();
                             break;
 
                         case "5":
-                            Console.WriteLine("Please enter a 5 key.");
                             SellPokemon();
                             break;
 
                         case "6":
-                            Console.WriteLine("Please enter a 6 key.");
                             battlePokemon();
                             break;
 
                         case "7":
-                            Console.WriteLine("Please enter a 7 key.");
-                            break;
-
-                        case "8":
-                            Console.WriteLine("Please enter a 8 key.");
                             PokemonShop();
                             break;
 
-                        case "9":
-                            Console.WriteLine("Please enter a 9 key.");
+                        case "8":
                             ViewItem();
-                            break;
-
-                        case "10":
-                            Console.WriteLine("Please enter a 9 key.");
-                            // ViewItem();
                             break;
 
                         default:
