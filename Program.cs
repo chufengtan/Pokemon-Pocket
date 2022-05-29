@@ -846,7 +846,7 @@ namespace PokemonPocket
                         Console.WriteLine("          1         2         3    ");
                         Console.WriteLine("     │---------│---------│---------│");
                         Console.WriteLine("     │" + Coordinates[0].found + "│" + Coordinates[1].found + "│" + Coordinates[2].found + "│");
-                        Console.WriteLine("  A  │" + Coordinates[0].found + "│" + Coordinates[1].found + "│" + Coordinates[3].found + "│");
+                        Console.WriteLine("  A  │" + Coordinates[0].found + "│" + Coordinates[1].found + "│" + Coordinates[2].found + "│");
                         Console.WriteLine("     │---------│---------│---------│");
                         Console.WriteLine("     │" + Coordinates[3].found + "│" + Coordinates[4].found + "│" + Coordinates[5].found + "│");
                         Console.WriteLine("  B  │" + Coordinates[3].found + "│" + Coordinates[4].found + "│" + Coordinates[5].found + "│");
