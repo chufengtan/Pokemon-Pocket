@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/chufengtan/Desktop/Personal/Projects/PokemonPocket/PokemonPocket.csproj": {}
+    "/Users/chufengtan/Desktop/NYP Modules/Y2S1 IT2154 Advance Programming/Assignment/PokemonPocket/PokemonPocket.csproj": {}
   },
   "projects": {
-    "/Users/chufengtan/Desktop/Personal/Projects/PokemonPocket/PokemonPocket.csproj": {
+    "/Users/chufengtan/Desktop/NYP Modules/Y2S1 IT2154 Advance Programming/Assignment/PokemonPocket/PokemonPocket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/chufengtan/Desktop/Personal/Projects/PokemonPocket/PokemonPocket.csproj",
+        "projectUniqueName": "/Users/chufengtan/Desktop/NYP Modules/Y2S1 IT2154 Advance Programming/Assignment/PokemonPocket/PokemonPocket.csproj",
         "projectName": "PokemonPocket",
-        "projectPath": "/Users/chufengtan/Desktop/Personal/Projects/PokemonPocket/PokemonPocket.csproj",
+        "projectPath": "/Users/chufengtan/Desktop/NYP Modules/Y2S1 IT2154 Advance Programming/Assignment/PokemonPocket/PokemonPocket.csproj",
         "packagesPath": "/Users/chufengtan/.nuget/packages/",
-        "outputPath": "/Users/chufengtan/Desktop/Personal/Projects/PokemonPocket/obj/",
+        "outputPath": "/Users/chufengtan/Desktop/NYP Modules/Y2S1 IT2154 Advance Programming/Assignment/PokemonPocket/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/chufengtan/.nuget/NuGet/NuGet.Config"
@@ -55,7 +55,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -64,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
         }
       }
     }
